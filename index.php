@@ -1,7 +1,13 @@
 <?php
 
-require_once "./class/Config.php";
+session_start();
 
+$Connected;
+if (isset($_SESSION['id'])) {
+	$Connected = true;
+  } else {
+    $Connected = false;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -11,11 +17,32 @@ require_once "./class/Config.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Module Sign In</title>
     <link rel="stylesheet" href="./CSS/style.css">
+    <script>
+        
+    <?php echo "let ConnectedBackground = '$Connected';"?>
+    let body = document.body;
+
+        if (ConnectedBackground) {
+            body.style.backgroundImage = url("./Assets/notConnected.png")
+        } else {
+            body.style.backgroundImage = url("./Assets/Connected.png")
+        }
+</script>
 </head>
-<body>
-    <nav></nav>
+<body class="main-content">
+    <nav>
+        <ul>
+            <li class="nav-btn" ><a id="SignUp-btn" href="./Module/Inscription.php">Sign up</a></li>
+            <li class="nav-btn" ><a id="Login-btn" href="./Module/Connexion.php">Login</a></li>
+            <li></li>
+        </ul>
+    </nav>
+    <main class="welcome">
+        <p id="welcome"></p>
+    </main>
     <section>
-        <a href="./module/Inscription.php">Register</a>
+        <a class="test" onclick="backgroundConnected()" href="./Module/Inscription.php">Register</a>
     </section>
+
 </body>
 </html>
